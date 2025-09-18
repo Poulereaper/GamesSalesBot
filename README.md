@@ -131,8 +131,8 @@ This project is licensed under the MIT License.
 This bot is not affiliated with or endorsed Steam, Epic Games, or CheapShark. It is a third-party tool created for personal and community use. Use at "your own risk".
 
 TO see the full policy or the terms of service of the bot, please refer to those links:
-- [Terms of Service](...)
-- [Privacy Policy](...)
+- [Terms of Service]([...](https://poulereaper.github.io/GamesSalesBot/))
+- [Privacy Policy]([...](https://poulereaper.github.io/GamesSalesBot/))
 
 ## Contact
 For any questions do not hesitate to contact me on Discord: poulereaper
