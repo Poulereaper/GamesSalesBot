@@ -1,6 +1,6 @@
 # GamesRadar
 
-GamesRadar is a Discord bot that automatically tracks and notifies your server about the latest game deals and free games from Steam, CheapShark, and Epic Games Store. It is designed for gaming communities who want to stay up-to-date with the best offers and freebies.
+GamesRadar is a Discord bot that automatically tracks and notifies your server about the latest game deals and free games (for PC players) from Steam, CheapShark, and Epic Games Store. It is designed for gaming communities who want to stay up-to-date with the best offers and freebies.
 
 ---
 
@@ -34,6 +34,16 @@ If you wish to self-host the bot, please refer to the installation instructions 
 - Support multiple languages for commands and notifications.
 
 ![alt text](images/image.png)
+
+**Platforms supported with this bot, in theory :**
+
+- Steam 
+- GreenManGaming
+- GOG 
+- Humble Bundle
+- GamersGate
+- Epic Games
+- Uplay
 
 ---
 
