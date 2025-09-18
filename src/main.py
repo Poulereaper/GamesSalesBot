@@ -17,12 +17,12 @@ load_dotenv()
 DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
 
 # ===== VAR ======
-POLL_INTERVAL = 1 # Every 6h (Multiple of 6h)
+POLL_INTERVAL = 1 # Every (6h) in production Multiple of 6h
 BEST_INTERVAL = 1 # Every day (Multiple of 24h)
 POPULAR_REFRESH_INTERVAL = 60 * 60 * 48  # Every 2 days
 
 SEEN_FILE = Path("seen.json") # Path to the seen file
-GUILDS_FILE = Path("guilds.json") # Path to the guilds config file
+GUILDS_FILE = Path("guilds.json")
 
 MIN_DISCOUNT = 20 # min discount percent to notify by default
 MAX_PRICE = 65.0 # max price in euros to notify by default
@@ -40,23 +40,31 @@ steam_popular_appids = []
 last_popular_refresh = 0
 
 # ====== LANG ======
-# "fr" or "en" for the moment
 
 translations = {
     "steam_deal": {
         "fr": "🔥 **{title}** est en promo {discount}% — prix: {price}€ (Steam)\n{url}",
-        "en": "🔥 **{title}** is on sale {discount}% — price: {price}€ (Steam)\n{url}"
+        "en": "🔥 **{title}** is on sale {discount}% — price: {price}€ (Steam)\n{url}",
+        "es": "🔥 **{title}** está en oferta {discount}% — precio: {price}€ (Steam)\n{url}",
+        "de": "🔥 **{title}** ist im Angebot {discount}% — Preis: {price}€ (Steam)\n{url}",
+        "it": "🔥 **{title}** è in offerta {discount}% — prezzo: {price}€ (Steam)\n{url}"
     },
     "cheapshark_deal": {
         "fr": "💸 **{title}** — {savings}% de réduction — {price}€\n{url}",
-        "en": "💸 **{title}** — {savings}% off — {price}€\n{url}"
+        "en": "💸 **{title}** — {savings}% off — {price}€\n{url}",
+        "es": "💸 **{title}** — {savings}% de descuento — {price}€\n{url}",
+        "de": "💸 **{title}** — {savings}% Rabatt — {price}€\n{url}",
+        "it": "💸 **{title}** — {savings}% di sconto — {price}€\n{url}"
     },
     "epic_free": {
         "fr": "🎁 **{title}** gratuit sur Epic Games Store !\nExpire le: {expiry}\n{url}",
-        "en": "🎁 **{title}** free on Epic Games Store!\nExpires: {expiry}\n{url}"
+        "en": "🎁 **{title}** free on Epic Games Store!\nExpires: {expiry}\n{url}",
+        "es": "🎁 **{title}** gratis en Epic Games Store!\nExpira: {expiry}\n{url}",
+        "de": "🎁 **{title}** kostenlos im Epic Games Store!\nEndet am: {expiry}\n{url}",
+        "it": "🎁 **{title}** gratis su Epic Games Store!\nScade il: {expiry}\n{url}"
     },
     "help_text": {
-        "fr": (
+         "fr": (
             "📖 **Commandes disponibles :**\n"
             "`$help` — Affiche cette aide\n"
             "`$lang fr/en` — Change la langue\n"
@@ -75,10 +83,40 @@ translations = {
             "`$filters` — Show or edit filters (ex: `$filters min_discount=30 max_price=50 epic=on steam=off`)\n"
             "`bests` — Show current best deals\n"
             "`free` — Show current free games\n"
+        ),
+        "es": (
+            "📖 **Comandos disponibles:**\n"
+            "`$help` — Muestra esta ayuda\n"
+            "`$lang es/fr/en/de/it` — Cambia el idioma\n"
+            "`$status` — Verifica si el bot está en línea\n"
+            "`$setchannel` — Establece este canal para notificaciones\n"
+            "`$filters` — Muestra o edita filtros (ej: `$filters min_discount=30 max_price=50 epic=on steam=off`)\n"
+            "`bests` — Muestra las mejores ofertas actuales\n"
+            "`free` — Muestra los juegos gratuitos actuales\n"
+        ),
+        "de": (
+            "📖 **Verfügbare Befehle:**\n"
+            "`$help` — Zeigt diese Hilfe\n"
+            "`$lang de/fr/en/es/it` — Sprache ändern\n"
+            "`$status` — Prüft, ob der Bot online ist\n"
+            "`$setchannel` — Setzt diesen Kanal für Benachrichtigungen\n"
+            "`$filters` — Zeigt oder bearbeitet Filter (z.B.: `$filters min_discount=30 max_price=50 epic=on steam=off`)\n"
+            "`bests` — Zeigt die besten aktuellen Angebote\n"
+            "`free` — Zeigt aktuelle Gratis-Spiele\n"
+        ),
+        "it": (
+            "📖 **Comandi disponibili:**\n"
+            "`$help` — Mostra questo aiuto\n"
+            "`$lang it/fr/en/es/de` — Cambia la lingua\n"
+            "`$status` — Verifica se il bot è online\n"
+            "`$setchannel` — Imposta questo canale per le notifiche\n"
+            "`$filters` — Mostra o modifica i filtri (es: `$filters min_discount=30 max_price=50 epic=on steam=off`)\n"
+            "`bests` — Mostra le migliori offerte attuali\n"
+            "`free` — Mostra i giochi gratuiti attuali\n"
         )
     },
     "help_loops": {
-        "fr": (
+         "fr": (
             "🔄 **Boucles automatiques suivies :**\n"
             "🔥 **Steam** — Vérifie les promos sur les jeux les plus populaires\n"
             "💸 **CheapShark** — Vérifie les grosses réductions sur plusieurs stores\n"
@@ -91,71 +129,147 @@ translations = {
             "💸 **CheapShark** — Tracks major discounts across multiple stores\n"
             "🎁 **Epic Games** — Tracks weekly free games\n"
             "🌟 **BestDeals** — Daily summary of top deals"
+        ),
+        "es": (
+            "🔄 **Bucles automáticos seguidos:**\n"
+            "🔥 **Steam** — Comprueba ofertas en los juegos más populares\n"
+            "💸 **CheapShark** — Comprueba grandes descuentos en varias tiendas\n"
+            "🎁 **Epic Games** — Comprueba los juegos gratuitos de la semana\n"
+            "🌟 **BestDeals** — Resumen diario de las mejores ofertas"
+        ),
+        "de": (
+            "🔄 **Automatische Schleifen überwacht:**\n"
+            "🔥 **Steam** — Überwacht Angebote der beliebtesten Spiele\n"
+            "💸 **CheapShark** — Überwacht große Rabatte in mehreren Stores\n"
+            "🎁 **Epic Games** — Überwacht wöchentliche Gratis-Spiele\n"
+            "🌟 **BestDeals** — Tägliche Zusammenfassung der Top-Angebote"
+        ),
+        "it": (
+            "🔄 **Cicli automatici seguiti:**\n"
+            "🔥 **Steam** — Controlla le offerte sui giochi più popolari\n"
+            "💸 **CheapShark** — Controlla i grandi sconti su vari store\n"
+            "🎁 **Epic Games** — Controlla i giochi gratuiti della settimana\n"
+            "🌟 **BestDeals** — Riepilogo quotidiano delle migliori offerte"
         )
     },
     "help_title": {
         "fr": "Aide GameRadar",
-        "en": "GameRadar Help"
+        "en": "GameRadar Help",
+        "es": "Ayuda GameRadar",
+        "de": "GameRadar Hilfe",
+        "it": "Guida GameRadar"
     },
     "status_ok": {
         "fr": "✅ Le bot est en ligne et fonctionne correctement.",
-        "en": "✅ The bot is online and running fine."
+        "en": "✅ The bot is online and running fine.",
+        "es": "✅ El bot está en línea y funcionando correctamente.",
+        "de": "✅ Der Bot ist online und funktioniert einwandfrei.",
+        "it": "✅ Il bot è online e funziona correttamente."
     },
     "lang_changed": {
         "fr": "🌍 La langue a été changée en **Français**.",
-        "en": "🌍 Language has been set to **English**."
+        "en": "🌍 Language has been set to **English**.",
+        "es": "🌍 El idioma ha sido cambiado a **Español**.",
+        "de": "🌍 Die Sprache wurde auf **Deutsch** geändert.",
+        "it": "🌍 La lingua è stata impostata su **Italiano**."
     },
     "lang_invalid": {
-        "fr": "❌ Langue invalide. Options : `fr`, `en`.",
-        "en": "❌ Invalid language. Options: `fr`, `en`."
+        "fr": "❌ Langue invalide. Options : `es`, `fr`, `en`, `de`, `it`.",
+        "en": "❌ Invalid language. Options: `es`, `fr`, `en`, `de`, `it`.",
+        "es": "❌ Idioma inválido. Opciones: `es`, `fr`, `en`, `de`, `it`.",
+        "de": "❌ Ungültige Sprache. Optionen: `de`, `fr`, `en`, `es`, `it`.",
+        "it": "❌ Lingua non valida. Opzioni: `it`, `fr`, `en`, `es`, `de`."
     },
     "lang_current": {
-        "fr": "🌍 Langue actuelle : **{lang}**\nLangues disponibles : `fr`, `en`\nUtilisez `$lang fr` ou `$lang en` pour changer.",
-        "en": "🌍 Current language: **{lang}**\nAvailable languages: `fr`, `en`\nUse `$lang fr` or `$lang en` to change."
+        "fr": "🌍 Langue actuelle : **{lang}**\nLangues disponibles : `it`, `fr`, `en`, `es`, `de`\nUtilisez `$lang fr` ou `$lang en` pour changer.",
+        "en": "🌍 Current language: **{lang}**\nAvailable languages: `it`, `fr`, `en`, `es`, `de`\nUse `$lang fr` or `$lang en` to change.",
+        "es": "🌍 Idioma actual: **{lang}**\nIdiomas disponibles: `it`, `fr`, `en`, `es`, `de`\nUsa `$lang es` para cambiar.",
+        "de": "🌍 Aktuelle Sprache: **{lang}**\nVerfügbare Sprachen: `it`, `fr`, `en`, `es`, `de`\nNutze `$lang de` zum Ändern.",
+        "it": "🌍 Lingua attuale: **{lang}**\nLingue disponibili: `it`, `fr`, `en`, `es`, `de`\nUsa `$lang it` per cambiare."
     },
     "channel_set": {
         "fr": "✅ Salon configuré : <#{channel_id}>",
-        "en": "✅ Channel set: <#{channel_id}>"
+        "en": "✅ Channel set: <#{channel_id}>",
+        "es": "✅ Canal configurado: <#{channel_id}>",
+        "de": "✅ Kanal gesetzt: <#{channel_id}>",
+        "it": "✅ Canale impostato: <#{channel_id}>"
     },
     "filters_current": {
         "fr": "📊 Filtres actuels :\n```\n{filters}\n```",
-        "en": "📊 Current filters:\n```\n{filters}\n```"
+        "en": "📊 Current filters:\n```\n{filters}\n```",
+        "es": "📊 Filtros actuales:\n```\n{filters}\n```",
+        "de": "📊 Aktuelle Filter:\n```\n{filters}\n```",
+        "it": "📊 Filtri attuali:\n```\n{filters}\n```"
     },
     "filter_invalid_value": {
         "fr": "❌ Valeur invalide pour {key}: {value}",
-        "en": "❌ Invalid value for {key}: {value}"
+        "en": "❌ Invalid value for {key}: {value}",
+        "es": "❌ Valor inválido para {key}: {value}",
+        "de": "❌ Ungültiger Wert für {key}: {value}",
+        "it": "❌ Valore non valido per {key}: {value}"
     },
     "filter_unknown": {
-        "fr": "❌ Filtre inconnu : {key}",
-        "en": "❌ Unknown filter: {key}"
+        "fr": "❌ Filtre inconnu : {filter_key}",
+        "en": "❌ Unknown filter: {filter_key}",
+        "es": "❌ Filtro desconocido: {filter_key}",
+        "de": "❌ Unbekannter Filter: {filter_key}",
+        "it": "❌ Filtro sconosciuto: {filter_key}"
     },
     "filters_updated": {
         "fr": "✅ Filtres mis à jour.",
-        "en": "✅ Filters updated."
+        "en": "✅ Filters updated.",
+        "es": "✅ Filtros actualizados.",
+        "de": "✅ Filter aktualisiert.",
+        "it": "✅ Filtri aggiornati."
     },
     "bestdeals_header": {
         "fr": "🌟 Meilleures offres du jour",
-        "en": "🌟 Today's Best Deals"
+        "en": "🌟 Today's Best Deals",
+        "es": "🌟 Mejores ofertas de hoy",
+        "de": "🌟 Beste Angebote des Tages",
+        "it": "🌟 Migliori offerte di oggi"
     },
     "bestdeals_free": {
         "fr": "Jeux gratuits les plus récents",
-        "en": "Most Recent Free Games"
+        "en": "Most Recent Free Games",
+        "es": "Juegos gratuitos más recientes",
+        "de": "Neueste Gratis-Spiele",
+        "it": "Giochi gratuiti più recenti"
     },
-     "bestdeals_line": {
+    "bestdeals_line": {
         "fr": "**{title}** — {discount}% — {price}€\n{url}",
-        "en": "**{title}** — {discount}% off — {price}€\n{url}"
+        "en": "**{title}** — {discount}% off — {price}€\n{url}",
+        "es": "**{title}** — {discount}% de descuento — {price}€\n{url}",
+        "de": "**{title}** — {discount}% Rabatt — {price}€\n{url}",
+        "it": "**{title}** — {discount}% di sconto — {price}€\n{url}"
     },
     "free_line": {
         "fr": "**{title}** — Expire le: {expiry}\n{url}",
-        "en": "**{title}** — Expires: {expiry}\n{url}"
+        "en": "**{title}** — Expires: {expiry}\n{url}",
+        "es": "**{title}** — Expira: {expiry}\n{url}",
+        "de": "**{title}** — Endet am: {expiry}\n{url}",
+        "it": "**{title}** — Scade il: {expiry}\n{url}"
     },
     "no_deals": {
         "fr": "❌ Aucune offre trouvée.",
-        "en": "❌ No deals found."
+        "en": "❌ No deals found.",
+        "es": "❌ No se encontraron ofertas.",
+        "de": "❌ Keine Angebote gefunden.",
+        "it": "❌ Nessuna offerta trovata."
     },
     "no_free": {
         "fr": "❌ Aucun jeu gratuit trouvé.",
-        "en": "❌ No free games found."
+        "en": "❌ No free games found.",
+        "es": "❌ No se encontraron juegos gratuitos.",
+        "de": "❌ Keine Gratis-Spiele gefunden.",
+        "it": "❌ Nessun gioco gratuito trovato."
+    },
+    "unknown_command": {
+        "fr": "❌ Commande inconnue.",
+        "en": "❌ Unknown command.",
+        "es": "❌ Comando desconocido.",
+        "de": "❌ Unbekannter Befehl.",
+        "it": "❌ Comando sconosciuto."
     }
 }
 
@@ -166,7 +280,7 @@ def tr(key, guild_id=None, **kwargs):
         lang = configs[str(guild_id)].get("lang", "en")
 
     if key not in translations:
-        return key 
+        return key
     return translations[key].get(lang, translations[key]["en"]).format(**kwargs)
 
 
@@ -290,13 +404,11 @@ def try_parse_date(s):
 
 
 # ====== Bot ======
-
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix="$", intents=intents, help_command=None)
 seen = load_seen()
 first_run = True
-
 
 # === Events ===
 
@@ -316,6 +428,12 @@ async def on_guild_join(guild):
         save_guild_config(configs)
         print(f"New config created for the guild {guild.name} ({guild.id})")
 
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.send(tr("unknown_command", guild_id=getattr(ctx.guild, "id", None)))
+    else:
+        raise error
 
 # === Commands ===
 
@@ -345,9 +463,11 @@ async def lang_command(ctx, lang: str = None):
     if gid not in configs:
         configs[gid] = default_guild_config()
 
+    allowed_langs = {"es", "fr", "en", "de", "it"}
+
     if lang is None:
         await ctx.send(tr("lang_current", guild_id=ctx.guild.id, lang=configs[gid]["lang"].upper()))
-    elif lang.lower() in ["fr", "en"]:
+    elif lang.lower() in allowed_langs:
         configs[gid]["lang"] = lang.lower()
         save_guild_config(configs)
         await ctx.send(tr("lang_changed", guild_id=ctx.guild.id))
@@ -375,10 +495,26 @@ async def filters_command(ctx, *, args=None):
 
     filters = configs[gid]["filters"]
 
+    allowed_keys = {
+        "epic", "steam", "cheapshark", "bestdeals", "silent",
+        "min_discount", "max_price", "best_discount", "best_price",
+        "notifs", "bestsnotifs"
+    }
+
     if not args:
         txt = "\n".join([f"{k} = {v}" for k, v in filters.items()])
         await ctx.send(tr("filters_current", guild_id=ctx.guild.id, filters=txt))
         return
+
+    for arg in args.split():
+        if "=" not in arg:
+            await ctx.send(tr("filter_unknown", guild_id=ctx.guild.id, filter_key=arg.strip()))
+            return
+        key, _ = arg.split("=", 1)
+        key = key.strip().lower()
+        if key not in allowed_keys:
+            await ctx.send(tr("filter_unknown", guild_id=ctx.guild.id, filter_key=key))
+            return
 
     for arg in args.split():
         if "=" not in arg:
@@ -388,16 +524,43 @@ async def filters_command(ctx, *, args=None):
         value = value.strip().lower()
 
         if key in ["epic", "steam", "cheapshark", "bestdeals", "silent"]:
-            filters[key] = value in ["1", "true", "on", "yes"]
-        elif key in ["min_discount", "max_price", "best_discount", "best_price", "notifs", "bestsnotifs"]:
+            filters[key] = value in {"1", "true", "on", "yes"}
+        elif key in ["min_discount", "best_discount"]:
             try:
-                filters[key] = float(value) if "." in value else int(value)
-            except:
+                val = int(value)
+                if not (0 <= val <= 100):
+                    raise ValueError
+                filters[key] = val
+            except Exception:
                 await ctx.send(tr("filter_invalid_value", guild_id=ctx.guild.id, key=key, value=value))
                 return
-        else:
-            await ctx.send(tr("filter_unknown", guild_id=ctx.guild.id, key=key))
-            return
+        elif key in ["max_price", "best_price"]:
+            try:
+                val = float(value)
+                if not (0 <= val <= 1000):
+                    raise ValueError
+                filters[key] = val
+            except Exception:
+                await ctx.send(tr("filter_invalid_value", guild_id=ctx.guild.id, key=key, value=value))
+                return
+        elif key == "notifs":
+            try:
+                val = int(value)
+                if not (1 <= val <= 8):
+                    raise ValueError
+                filters[key] = val
+            except Exception:
+                await ctx.send(tr("filter_invalid_value", guild_id=ctx.guild.id, key=key, value=value))
+                return
+        elif key == "bestsnotifs":
+            try:
+                val = int(value)
+                if not (1 <= val <= 8):
+                    raise ValueError
+                filters[key] = val
+            except Exception:
+                await ctx.send(tr("filter_invalid_value", guild_id=ctx.guild.id, key=key, value=value))
+                return
 
     configs[gid]["filters"] = filters
     save_guild_config(configs)
@@ -648,7 +811,7 @@ async def check_loop():
 
                         if sp["discount"] >= filters["min_discount"] and sp["price"] <= filters["max_price"]:
                             if previous_price is None or int(float(previous_price)) > int(sp["price"] * 100):
-                                seen["steam"][name_key] = str(int(sp["price"] * 100))  # keep cents like before
+                                seen["steam"][name_key] = str(int(sp["price"] * 100))
                                 save_seen(seen)
                                 if not first_run:
                                     msg = tr("steam_deal", guild_id=guild_id,
@@ -836,7 +999,11 @@ async def bestdeals_loop():
         if bests:
             desc_lines = []
             for deal in bests:
-                line = f"**{deal['title']}** — {deal['discount']}% — {deal['price']}€\n{deal['url']}"
+                line = tr("bestdeals_line", guild_id=guild_id,
+                        title=deal['title'],
+                        discount=deal['discount'],
+                        price=deal['price'],
+                        url=deal['url'])
                 desc_lines.append(line)
             embed.add_field(name="🔥 Top 5", value="\n\n".join(desc_lines), inline=False)
 
@@ -844,7 +1011,10 @@ async def bestdeals_loop():
             desc_lines = []
             for game in frees:
                 expiry = game.get("expiry") or "N/A"
-                line = f"**{game['title']}** — {expiry}\n{game['url']}"
+                line = tr("free_line", guild_id=guild_id,
+                        title=game['title'],
+                        expiry=expiry,
+                        url=game['url'])
                 desc_lines.append(line)
             embed.add_field(name=tr("bestdeals_free", guild_id=guild_id), value="\n\n".join(desc_lines), inline=False)
 
