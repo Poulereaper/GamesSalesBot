@@ -9,6 +9,13 @@ GamesRadar is a Discord bot that automatically tracks and notifies your server a
 You can invite the bot to your Discord server using the following link:
 [Invite GamesRadar](https://discord.com/oauth2/authorize?client_id=1417207388179661051&permissions=2252177771326464&integration_type=0&scope=bot)
 
+**Supported Language:**
+- English
+- French
+- German
+- Spanish
+- Italian
+
 If you wish to self-host the bot, please refer to the installation instructions at the end of this README.
 
 ---
