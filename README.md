@@ -1,1 +1,1 @@
-# GamesSalesBot
+# GamesRadar
