@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameRadar - Legal Documents</title>
+    <title>GameRadar - Discord Bot for Game Deals & Free Games</title>
     <style>
         * {
             margin: 0;
@@ -14,8 +14,8 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #e0e0e0;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #ffffff;
+            background: linear-gradient(135deg, #2c2f33, #23272a);
             min-height: 100vh;
         }
 
@@ -25,67 +25,259 @@
             padding: 20px;
         }
 
-        header {
+        /* Header Styles */
+        .main-header {
             text-align: center;
-            padding: 40px 0;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            margin-bottom: 30px;
+            padding: 60px 0;
+            background: linear-gradient(135deg, rgba(114, 137, 218, 0.15), rgba(255, 165, 0, 0.15));
+            border-radius: 20px;
+            margin-bottom: 40px;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .logo {
-            font-size: 3em;
+            font-size: 4em;
             font-weight: bold;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            background: linear-gradient(45deg, #7289da, #ffa500, #ff6347);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 30px rgba(255, 165, 0, 0.3);
         }
 
-        .subtitle {
+        .tagline {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            color: #b9bbbe;
+        }
+
+        .description {
+            font-size: 1.1em;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: #dcddde;
+        }
+
+        .install-btn {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(45deg, #7289da, #5865f2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
             font-size: 1.2em;
-            opacity: 0.8;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(114, 137, 218, 0.4);
+            margin: 10px;
         }
 
+        .install-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(114, 137, 218, 0.6);
+            background: linear-gradient(45deg, #5865f2, #7289da);
+        }
+
+        /* Navigation */
         .nav-buttons {
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin: 30px 0;
+            margin: 40px 0;
             flex-wrap: wrap;
         }
 
         .nav-btn {
-            padding: 12px 25px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
+            padding: 14px 30px;
+            background: linear-gradient(45deg, #36393f, #2f3136);
+            color: #dcddde;
             text-decoration: none;
             border-radius: 25px;
             transition: all 0.3s ease;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .nav-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(45deg, #764ba2, #667eea);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(45deg, #40444b, #36393f);
+            color: #ffffff;
         }
 
         .nav-btn.active {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            background: linear-gradient(45deg, #ffa500, #ff8c00);
+            color: #ffffff;
         }
 
+        /* Features Section */
+        .features-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(54, 57, 63, 0.8), rgba(47, 49, 54, 0.8));
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 165, 0, 0.2);
+            border-color: rgba(255, 165, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #7289da, #ffa500);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-title {
+            font-size: 1.3em;
+            color: #ffa500;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature-description {
+            color: #b9bbbe;
+        }
+
+        /* Commands Section */
+        .commands-section {
+            background: linear-gradient(135deg, rgba(54, 57, 63, 0.6), rgba(47, 49, 54, 0.6));
+            padding: 40px;
+            border-radius: 20px;
+            margin: 50px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .commands-title {
+            text-align: center;
+            font-size: 2.5em;
+            color: #ffa500;
+            margin-bottom: 30px;
+        }
+
+        .commands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .command-item {
+            background: rgba(40, 43, 48, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #7289da;
+        }
+
+        .command-name {
+            color: #7289da;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .command-desc {
+            color: #b9bbbe;
+            font-size: 0.9em;
+        }
+
+        /* Supported Platforms */
+        .platforms-section {
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .platforms-title {
+            font-size: 2em;
+            color: #ffa500;
+            margin-bottom: 30px;
+        }
+
+        .platforms-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .platform-item {
+            background: linear-gradient(135deg, rgba(54, 57, 63, 0.8), rgba(47, 49, 54, 0.8));
+            padding: 20px;
+            border-radius: 15px;
+            min-width: 120px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .platform-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(114, 137, 218, 0.2);
+        }
+
+        .platform-name {
+            color: #dcddde;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        /* Language Support */
+        .languages-section {
+            background: linear-gradient(135deg, rgba(114, 137, 218, 0.1), rgba(255, 165, 0, 0.1));
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .languages-title {
+            font-size: 2em;
+            color: #7289da;
+            margin-bottom: 20px;
+        }
+
+        .languages-list {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .language-tag {
+            background: rgba(114, 137, 218, 0.2);
+            color: #dcddde;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        /* Document sections (unchanged) */
         .document-section {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(54, 57, 63, 0.6);
             border-radius: 15px;
             padding: 30px;
             margin: 20px 0;
             backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             display: none;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .document-section.active {
@@ -93,22 +285,22 @@
         }
 
         .document-section h1 {
-            color: #4ecdc4;
+            color: #ffa500;
             margin-bottom: 20px;
             font-size: 2.5em;
             text-align: center;
         }
 
         .document-section h2 {
-            color: #ff6b6b;
+            color: #7289da;
             margin: 25px 0 15px 0;
             font-size: 1.5em;
-            border-bottom: 2px solid #ff6b6b;
+            border-bottom: 2px solid #7289da;
             padding-bottom: 5px;
         }
 
         .document-section h3 {
-            color: #45b7d1;
+            color: #ffa500;
             margin: 20px 0 10px 0;
             font-size: 1.2em;
         }
@@ -116,6 +308,7 @@
         .document-section p, .document-section li {
             margin-bottom: 10px;
             text-align: justify;
+            color: #dcddde;
         }
 
         .document-section ul {
@@ -130,7 +323,7 @@
             text-align: center;
             font-style: italic;
             margin-bottom: 30px;
-            color: #ffa726;
+            color: #ffa500;
             font-size: 1.1em;
         }
 
@@ -139,13 +332,14 @@
             padding: 20px;
             border-radius: 10px;
             margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .github-link {
             display: inline-block;
             margin-top: 20px;
             padding: 10px 20px;
-            background: #333;
+            background: #24292e;
             color: white;
             text-decoration: none;
             border-radius: 5px;
@@ -153,24 +347,30 @@
         }
 
         .github-link:hover {
-            background: #555;
+            background: #333;
         }
 
+        /* Footer */
         footer {
             text-align: center;
-            padding: 30px 0;
-            margin-top: 50px;
+            padding: 40px 0;
+            margin-top: 80px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            opacity: 0.7;
+            color: #72767d;
         }
 
+        /* Responsive Design */
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
             }
             
             .logo {
-                font-size: 2em;
+                font-size: 2.5em;
+            }
+            
+            .main-header {
+                padding: 40px 20px;
             }
             
             .nav-buttons {
@@ -183,6 +383,22 @@
                 text-align: center;
             }
             
+            .features-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .commands-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .platforms-grid {
+                gap: 15px;
+            }
+            
+            .languages-list {
+                gap: 10px;
+            }
+            
             .document-section {
                 padding: 20px;
             }
@@ -191,45 +407,151 @@
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1 class="logo">GameRadar</h1>
-            <p class="subtitle">Discord Bot for Game Deals & Free Games</p>
-        </header>
+        <!-- Main Header -->
+        <div class="main-header">
+            <h1 class="logo">🎮 GameRadar</h1>
+            <p class="tagline">Discord Bot for Game Deals & Free Games</p>
+            <p class="description">Automatically tracks and notifies your server about the latest game deals and free games from Steam, CheapShark, and Epic Games Store. Perfect for gaming communities who want to stay up-to-date with the best offers!</p>
+            <a href="https://discord.com/oauth2/authorize?client_id=1417207388179661051&permissions=2252177771326464&integration_type=0&scope=bot" class="install-btn" target="_blank">
+                🚀 Add to Discord
+            </a>
+        </div>
 
+        <!-- Navigation -->
         <div class="nav-buttons">
-            <a href="#" class="nav-btn active" onclick="showSection('home')">Home</a>
-            <a href="#" class="nav-btn" onclick="showSection('privacy')">Privacy Policy</a>
-            <a href="#" class="nav-btn" onclick="showSection('terms')">Terms of Service</a>
+            <a href="#" class="nav-btn active" onclick="showSection('home')">🏠 Home</a>
+            <a href="#" class="nav-btn" onclick="showSection('privacy')">🔒 Privacy Policy</a>
+            <a href="#" class="nav-btn" onclick="showSection('terms')">📋 Terms of Service</a>
         </div>
 
         <!-- Home Section -->
         <div id="home" class="document-section active">
-            <h1>Legal Documents</h1>
-            <div class="effective-date">
-                <strong>Effective Date:</strong> September 10, 2025<br>
-                <strong>Last Updated:</strong> September 10, 2025
+            <!-- Features Section -->
+            <div class="features-section">
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <div class="feature-title">Automatic Notifications</div>
+                    <div class="feature-description">Get instantly notified about new game discounts and free games directly in your Discord channel</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏪</div>
+                    <div class="feature-title">Multi-Store Support</div>
+                    <div class="feature-description">Tracks deals from Steam, CheapShark, Epic Games Store, and many other platforms</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <div class="feature-title">Custom Filters</div>
+                    <div class="feature-description">Set your own minimum discount, maximum price, and choose which stores to track</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">Daily Best Deals</div>
+                    <div class="feature-description">Receive a daily summary of the top 5 deals and up to 3 free games</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <div class="feature-title">Multi-Language</div>
+                    <div class="feature-description">Available in English, French, German, Spanish, and Italian</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <div class="feature-title">Per-Server Config</div>
+                    <div class="feature-description">Each server can have its own notification channel and filter settings</div>
+                </div>
             </div>
-            
-            <h2>About GameRadar</h2>
-            <p>GameRadar is a Discord bot that automatically tracks and notifies your server about the latest game deals and free games from Steam, CheapShark, and Epic Games Store. It is designed for gaming communities who want to stay up-to-date with the best offers and freebies.</p>
-            
-            <h2>Legal Information</h2>
-            <p>This page contains the legal documents governing the use of GameRadar bot:</p>
-            <ul>
-                <li><strong>Privacy Policy:</strong> Explains how we collect, use, and protect your information</li>
-                <li><strong>Terms of Service:</strong> Outlines the rules and conditions for using our bot</li>
-            </ul>
-            
-            <p>By using GameRadar, you agree to both documents. Please read them carefully.</p>
-            
+
+            <!-- Supported Languages -->
+            <div class="languages-section">
+                <h2 class="languages-title">🌐 Supported Languages</h2>
+                <div class="languages-list">
+                    <span class="language-tag">🇺🇸 English</span>
+                    <span class="language-tag">🇫🇷 French</span>
+                    <span class="language-tag">🇩🇪 German</span>
+                    <span class="language-tag">🇪🇸 Spanish</span>
+                    <span class="language-tag">🇮🇹 Italian</span>
+                </div>
+            </div>
+
+            <!-- Commands Section -->
+            <div class="commands-section">
+                <h2 class="commands-title">💻 Available Commands</h2>
+                <div class="commands-grid">
+                    <div class="command-item">
+                        <div class="command-name">$help</div>
+                        <div class="command-desc">Show help and available commands</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">$lang fr/en</div>
+                        <div class="command-desc">Change the bot's language</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">$status</div>
+                        <div class="command-desc">Check if the bot is online</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">$setchannel</div>
+                        <div class="command-desc">Set notification channel (admin only)</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">$filters</div>
+                        <div class="command-desc">Show or edit filters (admin only)</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">$bests</div>
+                        <div class="command-desc">Show the current best deals</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">$free</div>
+                        <div class="command-desc">Show the current free games</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Supported Platforms -->
+            <div class="platforms-section">
+                <h2 class="platforms-title">🏬 Supported Platforms</h2>
+                <div class="platforms-grid">
+                    <div class="platform-item">
+                        <div class="platform-name">Steam</div>
+                    </div>
+                    <div class="platform-item">
+                        <div class="platform-name">Epic Games</div>
+                    </div>
+                    <div class="platform-item">
+                        <div class="platform-name">GOG</div>
+                    </div>
+                    <div class="platform-item">
+                        <div class="platform-name">Humble Bundle</div>
+                    </div>
+                    <div class="platform-item">
+                        <div class="platform-name">GreenManGaming</div>
+                    </div>
+                    <div class="platform-item">
+                        <div class="platform-name">GamersGate</div>
+                    </div>
+                    <div class="platform-item">
+                        <div class="platform-name">Uplay</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
             <div class="contact-info">
-                <h3>Contact Information</h3>
+                <h3>📞 Contact & Support</h3>
                 <p><strong>Discord:</strong> poulereaper</p>
-                <p><strong>GitHub:</strong> <a href="https://github.com/Poulereaper/GamesSalesBot" class="github-link" target="_blank">GamesSalesBot Repository</a></p>
+                <p><strong>GitHub:</strong> <a href="https://github.com/Poulereaper/GamesSalesBot" class="github-link" target="_blank">📚 GamesSalesBot Repository</a></p>
+                <p><strong>Self-Host:</strong> Want to run your own instance? Check the GitHub repository for installation instructions!</p>
+            </div>
+
+            <!-- Legal Information -->
+            <div style="background: rgba(255, 165, 0, 0.1); padding: 20px; border-radius: 10px; margin-top: 30px; border: 1px solid rgba(255, 165, 0, 0.2);">
+                <h3 style="color: #ffa500; margin-bottom: 15px;">⚖️ Legal Information</h3>
+                <p>This bot is not affiliated with Steam, Epic Games, or CheapShark. By using GameRadar, you agree to our Privacy Policy and Terms of Service. Please read them carefully.</p>
+                <p style="margin-top: 10px;"><strong>Effective Date:</strong> September 10, 2025 | <strong>Last Updated:</strong> September 10, 2025</p>
             </div>
         </div>
 
-        <!-- Privacy Policy Section -->
+        <!-- Privacy Policy Section (unchanged content) -->
         <div id="privacy" class="document-section">
             <h1>Privacy Policy</h1>
             <div class="effective-date">
@@ -352,7 +674,7 @@
             <p><em>This Privacy Policy is effective as of the date listed above and governs your use of GameRadar bot.</em></p>
         </div>
 
-        <!-- Terms of Service Section -->
+        <!-- Terms of Service Section (unchanged content) -->
         <div id="terms" class="document-section">
             <h1>Terms of Service</h1>
             <div class="effective-date">
@@ -429,158 +751,4 @@
             <ul>
                 <li>Accuracy of third-party data</li>
                 <li>Availability of third-party services</li>
-                <li>Third-party terms of service or privacy policies</li>
-            </ul>
-
-            <h2>Service Availability</h2>
-            
-            <h3>Service Level:</h3>
-            <ul>
-                <li>We provide the bot "as is" without guarantees of uptime</li>
-                <li>The bot may experience downtime for maintenance or technical issues</li>
-                <li>We reserve the right to suspend service for violations of these terms</li>
-            </ul>
-
-            <h3>No Warranty:</h3>
-            <ul>
-                <li>The bot is provided without warranty of any kind</li>
-                <li>We do not guarantee accuracy of deal information</li>
-                <li>Deal availability and pricing may change without notice</li>
-            </ul>
-
-            <h2>Disclaimers and Limitations</h2>
-            
-            <h3>Gaming Platform Relationships:</h3>
-            <ul>
-                <li>GameRadar is not affiliated with Steam, Epic Games, CheapShark, or other gaming platforms</li>
-                <li>We are not responsible for the accuracy of deal information</li>
-                <li>Game purchases are subject to the terms of the respective platforms</li>
-            </ul>
-
-            <h3>Financial Disclaimers:</h3>
-            <ul>
-                <li>Deal prices and availability may change without notice</li>
-                <li>We are not responsible for failed purchases or price discrepancies</li>
-                <li>Users should verify all deal information before making purchases</li>
-            </ul>
-
-            <h3>Limitation of Liability:</h3>
-            <ul>
-                <li>We are not liable for any damages arising from bot usage</li>
-                <li>Our liability is limited to the maximum extent permitted by law</li>
-                <li>We are not responsible for losses due to inaccurate deal information</li>
-            </ul>
-
-            <h2>Intellectual Property</h2>
-            
-            <h3>Our Rights:</h3>
-            <ul>
-                <li>GameRadar bot code and documentation are protected by copyright</li>
-                <li>Bot name and branding are our intellectual property</li>
-                <li>We retain all rights to the bot's functionality and features</li>
-            </ul>
-
-            <h3>User Rights:</h3>
-            <ul>
-                <li>You retain ownership of your server configuration data</li>
-                <li>You may use bot-provided deal information for personal purposes</li>
-                <li>You may not claim ownership of the bot or its code</li>
-            </ul>
-
-            <h2>Termination</h2>
-            
-            <h3>We May Terminate Service:</h3>
-            <ul>
-                <li>For violations of these Terms</li>
-                <li>For abusive or inappropriate behavior</li>
-                <li>At our discretion with or without notice</li>
-                <li>For technical or legal reasons</li>
-            </ul>
-
-            <h3>You May Terminate:</h3>
-            <ul>
-                <li>By removing the bot from your Discord server</li>
-                <li>Your data may be retained as outlined in our Privacy Policy</li>
-            </ul>
-
-            <h2>Changes to Terms</h2>
-            <p>We reserve the right to modify these Terms at any time by:</p>
-            <ul>
-                <li>Posting updated Terms with a new "Last Updated" date</li>
-                <li>Providing notice of material changes when possible</li>
-                <li>Continued use after changes constitutes acceptance</li>
-            </ul>
-
-            <h2>Governing Law</h2>
-            <p>These Terms are governed by the laws of France, without regard to conflict of law principles.</p>
-
-            <h2>Age Restrictions</h2>
-            <p>The bot is intended for users who meet Discord's minimum age requirements in their jurisdiction.</p>
-
-            <h2>Contact and Support</h2>
-            <p>For questions about these Terms:</p>
-            <div class="contact-info">
-                <p><strong>Discord:</strong> poulereaper</p>
-                <p><strong>GitHub:</strong> <a href="https://github.com/Poulereaper/GamesSalesBot" target="_blank">GamesSalesBot Repository</a></p>
-            </div>
-
-            <p>For technical support:</p>
-            <ul>
-                <li>Use the bot's `$help` command</li>
-                <li>Contact via the channels listed above</li>
-            </ul>
-
-            <h2>Severability</h2>
-            <p>If any provision of these Terms is found unenforceable, the remaining provisions will continue in full force and effect.</p>
-
-            <h2>Entire Agreement</h2>
-            <p>These Terms, together with our Privacy Policy, constitute the entire agreement between you and GameRadar regarding the use of our bot.</p>
-
-            <p><strong>By using GameRadar bot, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service and our Privacy Policy.</strong></p>
-        </div>
-
-        <footer>
-            <p>&copy; 2025 GameRadar Bot. All rights reserved.</p>
-            <p>Not affiliated with Steam, Epic Games, or CheapShark.</p>
-        </footer>
-    </div>
-
-    <script>
-        function showSection(sectionId) {
-            // Hide all sections
-            const sections = document.querySelectorAll('.document-section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
-
-            // Remove active class from all buttons
-            const buttons = document.querySelectorAll('.nav-btn');
-            buttons.forEach(button => {
-                button.classList.remove('active');
-            });
-
-            // Show selected section
-            document.getElementById(sectionId).classList.add('active');
-
-            // Add active class to clicked button
-            event.target.classList.add('active');
-
-            // Scroll to top
-            window.scrollTo(0, 0);
-        }
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+                <li>Third-party terms of service or privacy
