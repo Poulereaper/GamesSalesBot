@@ -800,7 +800,7 @@ async def check_loop():
             filters = cfg.get("filters", default_guild_config()["filters"])
 
             # Notifications (Steam)
-            if (filters.get("steam", True) and not filters.get("silent", False) and (loopcycle % int(filters.get("notifs", POLL_INTERVAL)) == 0)):
+            if (filters.get("steam", True):
                 current_promos_steam_keys = {}
                 for sp in steam_promos:
                     try:
@@ -813,7 +813,7 @@ async def check_loop():
                             if previous_price is None or int(float(previous_price)) > int(sp["price"] * 100):
                                 seen["steam"][name_key] = str(int(sp["price"] * 100))
                                 save_seen(seen)
-                                if not first_run:
+                                if not first_run and not filters.get("silent", False) and (loopcycle % int(filters.get("notifs", POLL_INTERVAL)) == 0)):
                                     msg = tr("steam_deal", guild_id=guild_id,
                                              title=name,
                                              discount=sp["discount"],
@@ -833,7 +833,7 @@ async def check_loop():
                     save_seen(seen)
 
             # Notifications (CheapShark)
-            if filters.get("cheapshark", True) and not filters.get("silent", False) and (loopcycle % int(filters.get("notifs", POLL_INTERVAL)) == 0):
+            if filters.get("cheapshark", True):
                 current_promos_cs = {}
                 for cp in cheap_promos:
                     try:
@@ -847,7 +847,7 @@ async def check_loop():
                             if seen["cheapshark"].get(seen_key) != cp.get("internalName"):
                                 seen["cheapshark"][seen_key] = cp.get("internalName")
                                 save_seen(seen)
-                                if not first_run:
+                                if not first_run and not filters.get("silent", False) and (loopcycle % int(filters.get("notifs", POLL_INTERVAL)) == 0):
                                     msg = tr("cheapshark_deal", guild_id=guild_id,
                                              title=title,
                                              savings=int(savings),
@@ -867,7 +867,7 @@ async def check_loop():
                     save_seen(seen)
 
             # Notifications (Epic freebies)
-            if filters.get("epic", True) and not filters.get("silent", False) and (loopcycle % int(filters.get("notifs", POLL_INTERVAL)) == 0):
+            if filters.get("epic", True):
                 current_promos_epic = {}
                 for eg in epic_promos:
                     try:
@@ -879,7 +879,7 @@ async def check_loop():
                         if seen["epic_free"].get(unique_key) != unique_key:
                             seen["epic_free"][unique_key] = unique_key
                             save_seen(seen)
-                            if not first_run:
+                            if not first_run and not filters.get("silent", False) and (loopcycle % int(filters.get("notifs", POLL_INTERVAL)) == 0):
                                 msg = tr("epic_free", guild_id=guild_id,
                                          title=title,
                                          expiry=expiry,
