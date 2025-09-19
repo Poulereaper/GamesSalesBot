@@ -37,14 +37,16 @@
         }
 
         .logo {
-            font-size: 4em;
-            font-weight: bold;
-            background: linear-gradient(45deg, #7289da, #ffa500, #ff6347);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-            text-shadow: 0 0 30px rgba(255, 165, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-radius: 50%;
+            object-fit: cover;  
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
         }
 
         .tagline {
@@ -409,10 +411,18 @@
     <div class="container">
         <!-- Main Header -->
         <div class="main-header">
-            <h1 class="logo">🎮 GameRadar</h1>
+            <h1 class="logo">
+                <img src="image/logo.png" alt="GameRadar Logo" class="logo-img">
+                GameRadar
+            </h1>
             <p class="tagline">Discord Bot for Game Deals & Free Games</p>
-            <p class="description">Automatically tracks and notifies your server about the latest game deals and free games from Steam, CheapShark, and Epic Games Store. Perfect for gaming communities who want to stay up-to-date with the best offers!</p>
-            <a href="https://discord.com/oauth2/authorize?client_id=1417207388179661051&permissions=2252177771326464&integration_type=0&scope=bot" class="install-btn" target="_blank">
+            <p class="description">
+                Automatically tracks and notifies your server about the latest game deals and free games 
+                from Steam, CheapShark, and Epic Games Store. Perfect for gaming communities who want to 
+                stay up-to-date with the best offers!
+            </p>
+            <a href="https://discord.com/oauth2/authorize?client_id=1417207388179661051&permissions=2252177771326464&integration_type=0&scope=bot" 
+            class="install-btn" target="_blank">
                 🚀 Add to Discord
             </a>
         </div>
